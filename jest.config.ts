@@ -1,29 +1,39 @@
 import type { Config } from 'jest';
 
 const config: Config = {
+    watchPlugins: [
+        'jest-watch-typeahead/filename',
+        'jest-watch-typeahead/testname'
+    ],
     clearMocks: false,
     resetMocks: true,
     restoreMocks: false,
     verbose: true,
-    preset: 'ts-jest',
+    moduleFileExtensions: ['js', 'ts', 'vue'],
+    roots: ['<rootDir>/src/'],
+    collectCoverageFrom: ['**/*.{js, ts}', '!**/*.d.ts'],
+    testMatch: ['<rootDir>/src/**/*.{spec,test}.{js,ts}'],
     testEnvironment: 'jsdom',
     testEnvironmentOptions: {
         customExportConditions: ['node', 'node-addons']
     },
-    roots: ['<rootDir>/src/'],
-    moduleFileExtensions: ['js', 'ts', 'vue'],
-    moduleDirectories: ['node_modules', 'src'],
-    moduleNameMapper: {
-        '^@/(.*)$': '<rootDir>/src/$1',
-        '@qatium/sdk/(.*)$': '<rootDir>/node_modules/@qatium/sdk/build/$1',
-        '@qatium/sdk': '<rootDir>/node_modules/@qatium/sdk/build'
-    },
     transform: {
-        '^.+\\.tsx?$': 'ts-jest',
-        '^.+\\.vue$': '@vue/vue3-jest'
+        '\\.[jt]sx?$': [
+            'ts-jest',
+            {
+                tsconfig: 'tsconfig.json'
+            }
+        ],
+        '^.+\\.vue$': '@vue/vue3-jest',
+        '^.+\\.css$': './config/jest/cssTransform.cjs',
+        '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)':
+            './config/jest/fileTransform.cjs'
     },
-    testMatch: ['<rootDir>/src/**/*.{spec,test}.{js,ts}'],
-    transformIgnorePatterns: ['/node_modules/']
+    transformIgnorePatterns: [
+        '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$',
+        '^.+\\.module\\.(css|sass|scss)$'
+    ],
+    modulePaths: ['<rootDir>/src']
 };
 
 export default config;

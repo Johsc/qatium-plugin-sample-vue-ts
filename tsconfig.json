@@ -5,7 +5,7 @@
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "skipLibCheck": true,
-        "target": "es2022",
+        "target": "ES2020",
         "verbatimModuleSyntax": false,
         "allowJs": true,
         "resolveJsonModule": true,
@@ -13,7 +13,7 @@
         "allowImportingTsExtensions": true,
         "isolatedModules": true,
         "useDefineForClassFields": true,
-        "lib": ["ES2020", "DOM", "DOM.Iterable"],
+        "lib": ["ES6", "ES2020", "DOM", "DOM.Iterable"],
         "types": ["jest", "node"],
         "paths": {
             "@/*": ["src/*"]
@@ -30,6 +30,6 @@
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true
     },
-    "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+    "include": ["src/**/*.ts", "src/**/*.vue"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }
